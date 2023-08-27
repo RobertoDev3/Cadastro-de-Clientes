@@ -18,7 +18,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Iconify Design -->
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
 
     <!-- Logica do site -->
     <script defer src="logic.js"></script>
@@ -37,7 +37,7 @@
         <button type="button" class="btn btn-primary mobile" data-bs-toggle="modal" data-bs-target="#modal">Cadastrar
             Cliente</button>
 
-        <table>
+        <table id="tabela">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -48,50 +48,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Maria</td>
-                    <td>maria@gmail.com</td>
-                    <td>(11) 12345-6789</td>
-                    <td>Anapolis</td>
-                    <td>
-                        <button type="button" class="btn btn-success">
-                            <iconify-icon icon="akar-icons:edit"></iconify-icon>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <iconify-icon icon="ic:baseline-delete"></iconify-icon>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>João Carlos</td>
-                    <td>joao_carlos@gmail.com</td>
-                    <td>(11) 44444-3333</td>
-                    <td>Jandira</td>
-                    <td>
-                        <button type="button" class="btn btn-success">
-                            <iconify-icon icon="akar-icons:edit"></iconify-icon>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <iconify-icon icon="ic:baseline-delete"></iconify-icon>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Paulo</td>
-                    <td>paulo@hotmail.com</td>
-                    <td>(11) 23465-9127</td>
-                    <td>São Paulo</td>
-                    <td>
-                        <button type="button" class="btn btn-success">
-                            <iconify-icon icon="akar-icons:edit"></iconify-icon>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <iconify-icon icon="ic:baseline-delete"></iconify-icon>
-                        </button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </main>
@@ -102,18 +58,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalLabel">Novo Cliente</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparCampos()"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <input type="text" placeholder="Nome do Cliente" >
-                        <input type="email" placeholder="E-mail do Ciente" >
-                        <input id="celular" type="tel" placeholder="Celular do Cliente" maxlength="15" >
-                        <input type="text" placeholder="Cidade do Cliente" >
+                    <form id="form">
+                        <input id="nome" data-index="new" type="text" placeholder="Nome do Cliente"  class="campos" required>
+                        <input id="email" type="email" placeholder="E-mail do Ciente"  class="campos" required>
+                        <input id="celular" type="tel" placeholder="Celular do Cliente" class="campos"  maxlength="15" required>
+                        <input id="cidade" type="text" placeholder="Cidade do Cliente"  class="campos" required>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                            <button type="button" class="btn btn-danger">Cancelar</button>
+                            <button id="botaoSalvar" type="submit" class="btn btn-success">Salvar</button>
+                            <button id="botaoCancelar" type="button" data-bs-dismiss="modal" onclick="limparCampos()" class="btn btn-danger">Cancelar</button>
                         </div>
                     </form>
                 </div>
