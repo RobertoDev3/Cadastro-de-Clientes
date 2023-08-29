@@ -1,3 +1,28 @@
+const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+const estados = document.getElementById('uf');
+const cidade = document.getElementById('cidade');
+
+estados.addEventListener('click', async () => {
+    const urlCidades = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estados.value}/municipios`
+    const request = await fetch(urlCidades);
+    const response = await request.json();
+    let options = ''
+
+    response.forEach((cidades) => {
+        options += `<option>${cidades.nome}</option>`
+    })
+    cidade.innerHTML = options
+})
+
+window.addEventListener('load', async () => {
+    const request = await fetch(urlUF);
+    const response = await request.json();
+
+    response.forEach((uf) => {
+        estados.innerHTML += `<option>${uf.sigla}</option>`
+    })
+})
+
 const mascaraCelular = document.getElementById('celular');
 
 mascaraCelular.addEventListener('keypress', () => {
@@ -43,14 +68,15 @@ const salvarModal = () => {
             nome: document.getElementById('nome').value,
             email: document.getElementById('email').value,
             celular: document.getElementById('celular').value,
-            cidade: document.getElementById('cidade').value
+            cidade: document.getElementById('cidade').value,
+            uf: document.getElementById('uf').value
         }
         const index = document.getElementById('nome').dataset.index
         if (index == 'new') {
             criarCliente(cliente);
         } else {
-            atualizarCliente(index, cliente)
-            atualizarTabela()
+            atualizarCliente(index, cliente);
+            atualizarTabela();
         }
     }
 }
@@ -61,7 +87,7 @@ const criarLinha = (cliente, index) => {
         <td>${cliente.nome}</td>
         <td>${cliente.email}</td>
         <td>${cliente.celular}</td>
-        <td>${cliente.cidade}</td>
+        <td>${cliente.uf} - ${cliente.cidade}</td>
         <td>
             <button id="editar-${index}" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal">
                 <iconify-icon icon="akar-icons:edit"></iconify-icon>
@@ -88,12 +114,16 @@ const atualizarTabela = () => {
 const limparCampos = () => {
     const campos = document.querySelectorAll('.campos');
     campos.forEach(campo => campo.value = "");
+    estados.value = "UF";
+    cidade.innerHTML = `<option disabled selected>Cidades</option>`;
 }
 
 const preencherCampos = (cliente) => {
     document.getElementById('nome').value = cliente.nome
     document.getElementById('email').value = cliente.email
     document.getElementById('celular').value = cliente.celular
+    document.getElementById('uf').value = cliente.uf
+    cidade.innerHTML += `<option>${cliente.cidade}</option>`
     document.getElementById('cidade').value = cliente.cidade
     document.getElementById('nome').dataset.index = cliente.index
 }
@@ -109,13 +139,13 @@ const editarDeletarCliente = (evento) => {
         const [action, index] = evento.target.id.split('-')
 
         if (action == 'editar') {
-            editarCliente(index)
+            editarCliente(index);
         } else {
             const cliente = getLocalStorage()[index]
             const response = confirm(`Deseja realmente excluir o cliente ${cliente.nome}?`)
             if (response) {
-                deletarCliente(index)
-                atualizarTabela()
+                deletarCliente(index);
+                atualizarTabela();
             }
         }
     }

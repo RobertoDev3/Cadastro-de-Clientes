@@ -62,10 +62,16 @@
                 </div>
                 <div class="modal-body">
                     <form id="form">
-                        <input id="nome" data-index="new" type="text" placeholder="Nome do Cliente"  class="campos" required>
-                        <input id="email" type="email" placeholder="E-mail do Ciente"  class="campos" required>
-                        <input id="celular" type="tel" placeholder="Celular do Cliente" class="campos"  maxlength="15" required>
-                        <input id="cidade" type="text" placeholder="Cidade do Cliente"  class="campos" required>
+                        <input id="nome" class="campos" data-index="new" type="text" placeholder="Nome do Cliente" required>
+                        <input id="email" class="campos" type="email" placeholder="E-mail do Ciente" required>
+                        <input id="celular" class="campos" type="tel" placeholder="Celular do Cliente" maxlength="15" required>
+                        <select id="uf">
+                            <option class="cinza" disabled selected>UF</option>
+                          </select>
+
+                          <select id="cidade">
+                            <option class="cinza" disabled selected>Cidades</option>
+                          </select>
 
                         <div class="modal-footer">
                             <button id="botaoSalvar" type="submit" class="btn btn-success">Salvar</button>
