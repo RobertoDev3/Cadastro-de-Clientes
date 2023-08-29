@@ -58,24 +58,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalLabel">Novo Cliente</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limparCampos()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="limparCampos()"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form">
-                        <input id="nome" class="campos" data-index="new" type="text" placeholder="Nome do Cliente" required>
+                        <input id="nome" class="campos" data-index="new" type="text" placeholder="Nome do Cliente"
+                            required>
                         <input id="email" class="campos" type="email" placeholder="E-mail do Ciente" required>
-                        <input id="celular" class="campos" type="tel" placeholder="Celular do Cliente" maxlength="15" required>
+                        <input id="celular" class="campos" type="tel" placeholder="Celular do Cliente" required>
                         <select id="uf">
-                            <option class="cinza" disabled selected>UF</option>
-                          </select>
+                            <option disabled selected>UF</option>
+                        </select>
 
-                          <select id="cidade">
-                            <option class="cinza" disabled selected>Cidades</option>
-                          </select>
+                        <select id="cidade">
+                            <option disabled selected>Cidades</option>
+                        </select>
 
                         <div class="modal-footer">
                             <button id="botaoSalvar" type="submit" class="btn btn-success">Salvar</button>
-                            <button id="botaoCancelar" type="button" data-bs-dismiss="modal" onclick="limparCampos()" class="btn btn-danger">Cancelar</button>
+                            <button id="botaoCancelar" type="button" data-bs-dismiss="modal" onclick="limparCampos()"
+                                class="btn btn-danger">Cancelar</button>
                         </div>
                     </form>
                 </div>

@@ -136,13 +136,11 @@ input {
 #uf {
     width: calc(16% - 10px);
     appearance: none;
-    color: rgb(128, 128, 128);
 }
 
 #cidade {
     width: calc(34% - 10px);
     appearance: none;
-    color: rgb(128, 128, 128);
 }
 
 #uf, #cidade {

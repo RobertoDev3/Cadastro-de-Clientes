@@ -12,7 +12,7 @@ estados.addEventListener('click', async () => {
         options += `<option>${cidades.nome}</option>`
     })
     cidade.innerHTML = options
-})
+});
 
 window.addEventListener('load', async () => {
     const request = await fetch(urlUF);
@@ -21,20 +21,30 @@ window.addEventListener('load', async () => {
     response.forEach((uf) => {
         estados.innerHTML += `<option>${uf.sigla}</option>`
     })
-})
+});
 
 const mascaraCelular = document.getElementById('celular');
 
-mascaraCelular.addEventListener('keypress', () => {
-    let inputlength = mascaraCelular.value.length
+mascaraCelular.addEventListener('input', () => {
 
-    if (inputlength === 0) {
-        mascaraCelular.value += '('
-    } else if (inputlength === 3) {
-        mascaraCelular.value += ') '
-    } else if (inputlength === 10) {
-        mascaraCelular.value += '-'
+    const limparValor = mascaraCelular.value.replace(/\D/g, '').substring(0,11);
+
+    const numerosArray = limparValor.split('');
+    let numeroFormatado = '';
+
+    if (numerosArray.length > 0) {
+        numeroFormatado += `(${numerosArray.slice(0,2).join('')})`;
     }
+    
+    if (numerosArray.length > 2) {
+        numeroFormatado += ` ${numerosArray.slice(2,7).join('')}`;
+    }
+    
+    if (numerosArray.length > 7) {
+        numeroFormatado += `-${numerosArray.slice(7,11).join('')}`;
+    }
+
+    mascaraCelular.value = numeroFormatado;
 });
 
 const getLocalStorage = () => JSON.parse(localStorage.getItem('db_cliente')) ?? [];
@@ -111,38 +121,42 @@ const atualizarTabela = () => {
     dbCliente.forEach(criarLinha);
 }
 
+const tituloModal = document.querySelector('.modal-title');
+
 const limparCampos = () => {
     const campos = document.querySelectorAll('.campos');
     campos.forEach(campo => campo.value = "");
     estados.value = "UF";
     cidade.innerHTML = `<option disabled selected>Cidades</option>`;
+    tituloModal.innerHTML = 'Novo Cliente';
 }
 
 const preencherCampos = (cliente) => {
-    document.getElementById('nome').value = cliente.nome
-    document.getElementById('email').value = cliente.email
-    document.getElementById('celular').value = cliente.celular
-    document.getElementById('uf').value = cliente.uf
-    cidade.innerHTML += `<option>${cliente.cidade}</option>`
-    document.getElementById('cidade').value = cliente.cidade
-    document.getElementById('nome').dataset.index = cliente.index
+    document.getElementById('nome').value = cliente.nome;
+    document.getElementById('email').value = cliente.email;
+    document.getElementById('celular').value = cliente.celular;
+    document.getElementById('uf').value = cliente.uf;
+    cidade.innerHTML += `<option>${cliente.cidade}</option>`;
+    document.getElementById('cidade').value = cliente.cidade;
+    document.getElementById('nome').dataset.index = cliente.index;
 }
 
 const editarCliente = (index) => {
-    const cliente = getLocalStorage()[index]
-    cliente.index = index
+    const cliente = getLocalStorage()[index];
+    cliente.index = index;
+    tituloModal.innerHTML = 'Editar Cliente';
     preencherCampos(cliente);
 }
 
 const editarDeletarCliente = (evento) => {
     if (evento.target.type == 'submit') {
-        const [action, index] = evento.target.id.split('-')
+        const [action, index] = evento.target.id.split('-');
 
         if (action == 'editar') {
             editarCliente(index);
         } else {
-            const cliente = getLocalStorage()[index]
-            const response = confirm(`Deseja realmente excluir o cliente ${cliente.nome}?`)
+            const cliente = getLocalStorage()[index];
+            const response = confirm(`Deseja realmente excluir o cliente ${cliente.nome}?`);
             if (response) {
                 deletarCliente(index);
                 atualizarTabela();
