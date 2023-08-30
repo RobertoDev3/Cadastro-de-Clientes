@@ -1,5 +1,5 @@
 # Cadastro de Clientes
-O projeto foi realizado com o intuido de criar um CRUD e aprimorar meus conhecimentos com javascript.
+O projeto foi realizado com o intuido de criar um CRUD salvando os dados no LocalStorage para aprimorar meus conhecimentos com javascript e API.
 
 ## Layout
 
