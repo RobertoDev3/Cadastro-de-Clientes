@@ -1,3 +1,21 @@
-⚠️ PROJETO EM OBRA ⚠️
+# Cadastro de Clientes
+O projeto foi realizado com o intuido de criar um CRUD e aprimorar meus conhecimentos com javascript.
 
-![EM OBRA](https://github.com/RobertoDev3/Cadastro-de-Clientes/assets/127002141/9da459b7-bf1f-488f-9f3a-fb7f61d75b8b)
+## Layout
+
+<img src="assets/layout.jpg" />
+
+## Funcionalidades
+- Cadastrar cliente.
+- Editar Cliente.
+- Deletar Cliente.
+- Pesquisar cliente por qualquer um de seus dados.
+
+## *Tecnologias*
+> Html / Css
+> JavaScript
+> Bootstrap
+> Sweet Alert
+> Iconify Design
+
+[⭐ Acesse a pagina clicando aqui ⭐](https://robertodev3.github.io/Cadastro-de-Clientes)
