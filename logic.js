@@ -18,30 +18,41 @@ window.addEventListener('load', async () => {
     const request = await fetch(urlUF);
     const response = await request.json();
 
+    let todosOsUf = [];
+
     response.forEach((uf) => {
-        estados.innerHTML += `<option>${uf.sigla}</option>`
-    })
+        todosOsUf.push(uf.sigla);
+    });
+
+    let ufOrganizado = todosOsUf.sort();
+    let optionsHtml = "";
+
+    ufOrganizado.forEach((uf) => {
+        optionsHtml += `<option>${uf}</option>`;
+    });
+    
+    estados.innerHTML += optionsHtml;
 });
 
 const mascaraCelular = document.getElementById('celular');
 
 mascaraCelular.addEventListener('input', () => {
 
-    const limparValor = mascaraCelular.value.replace(/\D/g, '').substring(0,11);
+    const limparValor = mascaraCelular.value.replace(/\D/g, '').substring(0, 11);
 
     const numerosArray = limparValor.split('');
     let numeroFormatado = '';
 
     if (numerosArray.length > 0) {
-        numeroFormatado += `(${numerosArray.slice(0,2).join('')})`;
+        numeroFormatado += `(${numerosArray.slice(0, 2).join('')})`;
     }
-    
+
     if (numerosArray.length > 2) {
-        numeroFormatado += ` ${numerosArray.slice(2,7).join('')}`;
+        numeroFormatado += ` ${numerosArray.slice(2, 7).join('')}`;
     }
-    
+
     if (numerosArray.length > 7) {
-        numeroFormatado += `-${numerosArray.slice(7,11).join('')}`;
+        numeroFormatado += `-${numerosArray.slice(7, 11).join('')}`;
     }
 
     mascaraCelular.value = numeroFormatado;
