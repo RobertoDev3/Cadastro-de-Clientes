@@ -3,7 +3,7 @@ O projeto foi realizado com o intuido de criar um CRUD e aprimorar meus conhecim
 
 ## Layout
 
-<img src="assets/layout.jpg" />
+<img src="assets/layout.JPG" />
 
 ## Funcionalidades
 - Cadastrar cliente.
