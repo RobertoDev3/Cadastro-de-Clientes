@@ -13,9 +13,14 @@ O projeto foi realizado com o intuido de criar um CRUD e aprimorar meus conhecim
 
 ## *Tecnologias*
 > Html / Css
+
 > JavaScript
+
 > Bootstrap
+
 > Sweet Alert
+
 > Iconify Design
 
+<br>
 [⭐ Acesse a pagina clicando aqui ⭐](https://robertodev3.github.io/Cadastro-de-Clientes)
