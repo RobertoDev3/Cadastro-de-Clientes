@@ -1,6 +1,9 @@
 const urlUF = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
+const mascaraCelular = document.getElementById('celular');
 const estados = document.getElementById('uf');
 const cidade = document.getElementById('cidade');
+const tituloModal = document.querySelector('.modal-title');
+const modalBody = document.querySelector('.modal-body');
 
 estados.addEventListener('click', async () => {
     const urlCidades = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estados.value}/municipios`
@@ -30,11 +33,10 @@ window.addEventListener('load', async () => {
     ufOrganizado.forEach((uf) => {
         optionsHtml += `<option>${uf}</option>`;
     });
-    
+
     estados.innerHTML += optionsHtml;
 });
 
-const mascaraCelular = document.getElementById('celular');
 
 mascaraCelular.addEventListener('input', () => {
 
@@ -132,7 +134,6 @@ const atualizarTabela = () => {
     dbCliente.forEach(criarLinha);
 }
 
-const tituloModal = document.querySelector('.modal-title');
 
 const limparCampos = () => {
     const campos = document.querySelectorAll('.campos');
@@ -160,6 +161,7 @@ const editarCliente = (index) => {
 }
 
 const editarDeletarCliente = (evento) => {
+
     if (evento.target.type == 'submit') {
         const [action, index] = evento.target.id.split('-');
 
@@ -167,11 +169,28 @@ const editarDeletarCliente = (evento) => {
             editarCliente(index);
         } else {
             const cliente = getLocalStorage()[index];
-            const response = confirm(`Deseja realmente excluir o cliente ${cliente.nome}?`);
-            if (response) {
-                deletarCliente(index);
-                atualizarTabela();
-            }
+
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: `Após deletar não será possivel recuperar o cliente ${cliente.nome}`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: 'Não!!!',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, tenho certeza! '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deletado',
+                        `${cliente.nome} deletado com sucesso!`,
+                        'success'
+                    )
+                    deletarCliente(index);
+                    atualizarTabela();
+                }
+            })
+
         }
     }
 }
@@ -180,3 +199,24 @@ atualizarTabela();
 
 document.getElementById('botaoSalvar').addEventListener('click', salvarModal);
 document.querySelector('#tabela>tbody').addEventListener('click', editarDeletarCliente);
+
+const inputBusca = document.getElementById('input_busca');
+const tabela = document.querySelector('#tabela>tbody');
+
+inputBusca.addEventListener('keyup', () => {
+    let expressao = inputBusca.value.toLowerCase();
+    let linhas = tabela.getElementsByTagName('tr');
+    for (let posicao in linhas) {
+        if (true === isNaN(posicao)) {
+            continue
+        }
+
+        let conteudoLinha = linhas[posicao].innerHTML.toLowerCase();
+
+        if (true === conteudoLinha.includes(expressao)) {
+            linhas[posicao].style.display = '';
+        } else {
+            linhas[posicao].style.display = 'none';
+        }
+    }
+})

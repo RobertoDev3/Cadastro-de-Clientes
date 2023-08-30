@@ -55,8 +55,9 @@ h2 {
 }
 
 button iconify-icon {
-    transform: scale(1.5);
+    scale: 1.5;
     padding: 5px 0 0 0;
+    pointer-events: none;
 }
 
 table {
@@ -119,6 +120,16 @@ form {
     margin: 10px 0 0 0;
     height: 40px;
     width: 100px;
+}
+
+.ajuste_input {
+    width: 450px;
+    margin-right: 3px;
+}
+
+.ajuste_lupa { 
+    position: absolute;
+    right: 20px;
 }
 
 input, #uf, #cidade {
@@ -237,6 +248,14 @@ input {
 
     form {
         margin-right: 0;
+    }
+
+    .ajuste_input {
+        margin: 0 10px;
+    }
+
+    .ajuste_lupa { 
+        right: 25px;
     }
 
     input, #uf, #cidades {
